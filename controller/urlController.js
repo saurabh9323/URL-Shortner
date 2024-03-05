@@ -3,6 +3,7 @@ const shortId = require("shortid");
 const URL = require("../model/url");
 
 exports.handleGenerateNewShortURL = async (req, res) => {
+  console.log(req.body);
   const { shortUrl } = req.body;
   if (!shortUrl) res.status(400).json({ error: "url is required" });
   const SHORTID = shortId();
@@ -11,7 +12,7 @@ exports.handleGenerateNewShortURL = async (req, res) => {
     redirectURL: shortUrl,
     visitHistory: [],
   });
-  res.status(200).json({ id: SHORTID });
+  res.render("home", { id: SHORTID });
 };
 
 exports.shortId = async (req, res) => {

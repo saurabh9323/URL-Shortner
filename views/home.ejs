@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortner</h1>
+      <% if(locals.id) {%>
+      <h4>
+        URL Generated:
+        <a href="http://127.0.0.1:3000/url/<%= id %>"
+          >http://127.0.0.1:3000/url/<%= id %></a
+        >
+      </h4>
+
+      <% } %>
+      <div>
+        <form method="post" action="/url">
+          <h3>Enter your Original URL</h3>
+          <input
+            type="text"
+            placeholder="htpps//www.example.com"
+            name="shortUrl"
+          />
+          <button type="submit">Generate</button>
+        </form>
+      </div>
+      <div>
+        <% if(locals.urls) {%>
+        <table>
+          <thead>
+            <th>Sr.No</th>
+            <th>ShortID</th>
+            <th>RedirectURL</th>
+            <th>Clicks</th>
+          </thead>
+          <tbody>
+            <% urls.forEach((url,index) => { %>
+            <tr>
+              <td><%=index + 1 %></td>
+              <td><%=url.shortId %></td>
+              <td><%=url.redirectURL %></td>
+              <td><%=url.visitHistory.length %></td>
+            </tr>
+
+            <%})%>
+          </tbody>
+        </table>
+        <% } %>
+        <a href="http://localhost:3000/" class="button">back</a>
+      </div>
+    </div>
+    <div class="mode-toggle">
+      <input type="checkbox" id="toggle" class="checkbox" />
+      <label for="toggle" class="label">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+        <div class="ball"></div>
+      </label>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
